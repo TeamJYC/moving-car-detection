@@ -18,9 +18,9 @@ from darknet import Darknet
 from torch.autograd import Variable
 
 start = 0
-batch_size = 1
+batch_size = 1 # 한번에 네트워크에 넘기는 데이터 수, 1개 데이터에 관해 예측, 실제 레이블 값과 비교
 confidence = 0.5
-nms_thesh = 0.4
+nms_thesh = 0.4 #non maximum suppresion : 가장 큰 픽셀 이외 제거(중복 제거 목적)
 resol = 416 # 해상도
 color = [10, 10, 0]
 font = cv2.FONT_HERSHEY_PLAIN
@@ -33,7 +33,7 @@ video = image_directory + image_name
 
 num_classes = 80
 classes = load_classes("data/capstone.names")
-CUDA = torch.cuda.is_available()
+CUDA = torch.cuda.is_available() # CUDA operations 설정하고 실행
 
 print("Reading cfg files..")
 model = Darknet(cfg)
@@ -95,7 +95,7 @@ while cap.isOpened():
 
         if type(output) == int:
             frames += 1
-            frame = cv2.addWeighted(frame, 1, region, 0.7, 0)
+            frame = cv2.addWeighted(frame, 1, region, 0.7, 0) # frame*1 + region*0.7 + 0
             cv2.imshow("frame", frame)
 
             key = cv2.waitKey(1)

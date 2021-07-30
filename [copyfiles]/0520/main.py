@@ -53,10 +53,10 @@ def gaussian_blur(img, kernel_size):
     return cv2.GaussianBlur(img, (kernel_size, kernel_size), 0)
 
 def region_of_interest(img, vertices):
-        mask = np.zeros_like(img)
+        mask = np.zeros_like(img) #img와 같은 크기의 빈 이미지 mask 생성
 
         if len(img.shape) > 2:
-            channel_count = img.shape[2]
+            channel_count = img.shape[2] 
             ignore_mask_color = (255, ) * channel_count
         else:
             ignore_mask_color = 255
@@ -67,7 +67,7 @@ def region_of_interest(img, vertices):
         masked_image = cv2.bitwise_and(img, mask)
         return masked_image
 
-def get_slope(x1,y1,x2,y2):
+def get_slope(x1,y1,x2,y2): #기울기
     return (y2-y1)/(x2-x1)
 
 def draw_lines(img, lines):
@@ -75,7 +75,7 @@ def draw_lines(img, lines):
     global first_frame
     global next_frame
 
-    y_global_min = img.shape[0] # min은 y값 중 가장 큰값을 의미할 것이다. 또는 차로부터 멀어져 길을 따라 내려가는 지점 (?)
+    y_global_min = img.shape[0] # min은 y값 중 가장 큰값을 의미?, 또는 차로부터 멀어져 길을 따라 내려가는 지점 (?)
     y_max = img.shape[0]
 
     l_slope, r_slope = [], []
